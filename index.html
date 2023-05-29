@@ -4,9 +4,39 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <title>VCard Generator</title>
 </head>
 <body>
-  
+  <div class="container">
+    <h1 class="title">VCard Generator</h1>
+    <main>
+      <div class="data">
+        <div class="data__header">
+          <h3 class="data__title">Personal Data</h3>
+        </div>
+        <input class="data__input" type="text" placeholder="Name">
+        <input class="data__input" type="text" placeholder="Last Name">
+        <input class="data__input" type="email" placeholder="e-mail">
+        <input class="data__input" type="tel" placeholder="Phone">
+      </div>
+      <div class="options">
+        <div class="options__header">
+          <h3 class="options__title">Options</h3>
+        </div>
+        <div class="dots">
+          <label for="">Dot Style</label>
+          <select name="dot-style" id="">
+            <option value="">Rounded</option>
+            <option value="">Square</option>
+          </select>
+        </div>
+      </div>
+      <div class="qr"></div>
+    </main>
+  </div>
 </body>
 </html>
