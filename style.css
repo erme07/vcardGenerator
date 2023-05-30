@@ -36,11 +36,9 @@ body{
 }
 main{
   display: flex;
-  /* flex-direction: column; */
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  column-gap: 10px;
-  row-gap: 20px;
+  gap: 30px;
 }
 .data{
   display: flex;
@@ -69,7 +67,6 @@ main{
   border-bottom: 1px solid black;
 }
 .field{
-  /* width: calc(50% - 5px); */
   padding: 3px 10px;
   display: flex;
   border-radius: 10px;
@@ -93,9 +90,7 @@ legend{
   display: flex;
   align-items: center;
 }
-/* .field__style{
-  gap: 5px;
-} */
+
 .field__color input{
   width: 30px;
   height: 30px;
@@ -107,7 +102,6 @@ legend{
   flex-basis: 100%;
   padding: 20px;
   border-radius: 10px;
-  /* border: 1px solid var(--textColor); */
   outline: 1px solid var(--textColor);
   display: flex;
   flex-wrap: wrap;
@@ -118,6 +112,7 @@ legend{
 .button{
   flex-basis: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -127,7 +122,7 @@ legend{
   color: var(--backColor);
   border: none;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .qr{
@@ -136,7 +131,7 @@ legend{
   background-color:lightgray;
 }
 .options{
-  width: 200px;
+  flex-basis: min-content;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -181,4 +176,30 @@ legend{
     40%, 80% {
         transform: rotate(10deg);
     }
+}
+
+
+@media screen and (max-width: 480px){
+  .content{
+    outline: none;
+    padding: 0;
+  }
+  .button{
+    gap: 10px;
+  }
+  .data__input{
+    flex-basis: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .container{
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 20px 10px;
+  }
+  .repo-link{
+    width: 60px;
+    height: 60px;
+  }
 }

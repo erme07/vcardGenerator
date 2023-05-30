@@ -5,7 +5,7 @@ datos.addEventListener("change", (e) => {
   console.log(e.target.value);
 })
 
-var colore = "#77ff11";
+var colore = "#d53839";
 
 
 var imgcon = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -42,7 +42,7 @@ END:VCARD`;
     qrOptions: {
       typeNumber: 0,
       mode: "Byte",
-      errorCorrectionLevel: "M"
+      errorCorrectionLevel: "Q"
     },
     imageOptions: {
       hideBackgroundDots: true,
@@ -51,7 +51,7 @@ END:VCARD`;
     },
     dotsOptions: {
       type: "extra-rounded",
-      color: "#000000"
+      color: "#182c2b"
     },
     backgroundOptions: {
       color: "#ffffff"
@@ -70,12 +70,12 @@ END:VCARD`;
         rotation: 0
       }
     },
-    cornersSquareOptions: { type: "extra-rounded", color: "#EC6F09" },
+    cornersSquareOptions: { type: "extra-rounded", color: "#182c2b" },
     cornersSquareOptionsHelper: {
       colorType: { single: true, gradient: false },
       gradient: { linear: true, radial: false, color1: "#000000", color2: "#000000", rotation: 0 }
     },
-    cornersDotOptions: { type: "", color: "#000000" },
+    cornersDotOptions: { type: "", color: "#d53839" },
     cornersDotOptionsHelper: {
       colorType: { single: true, gradient: false },
       gradient: { linear: true, "radial": false, color1: "#000000", color2: "#000000", rotation: 0 }
