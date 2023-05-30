@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js" defer></script>
+  <script src="script.js" defer></script>
   <title>VCard Generator</title>
 </head>
 <body>
@@ -26,7 +28,7 @@
   <div class="container">
     <h1 class="title">VCard Generator</h1>
     <main>
-      <div class="data">
+      <div class="data" id="data">
         <div class="data__header">
           <h3 class="data__title">Personal Data</h3>
         </div>
@@ -35,12 +37,20 @@
         <input class="data__input" type="email" placeholder="e-mail" value="james.bond007@gmail.com">
         <input class="data__input" type="tel" placeholder="Phone" value="4564534">
       </div>
-      <fieldset class="field">
+      <div class="content">
+        <div class="button">
+          <button class="button__generate" id="generarQr">GENERATE</button>
+          <button class="button__clear" id="clear">CLEAR</button>
+          <button class="button__download">DOWNLOAD</button>
+        </div>
+        <div class="qr" id="qr"></div>
+        <div class="options">
+          <fieldset class="field">
         <legend class="field__header">
           Dots Options
         </legend>
         <div class="field__style">
-          <label for="">Style</label>
+          <!-- <label for="">Style</label> -->
           <select name="dot-style" id="">
             <option value="">Square</option>
             <option value="">Dots</option>
@@ -51,16 +61,16 @@
           </select>
         </div>
         <div class="field__color">
-          <label for="">Color</label>
+          <!-- <label for="">Color</label> -->
           <input type="color" value="#182c2b">
         </div>
       </fieldset>
       <fieldset class="field">
         <legend class="field__header">
-          Corners Square Options
+          Corners Square
         </legend>
         <div class="field__style">
-          <label for="">Style</label>
+          <!-- <label for="">Style</label> -->
           <select name="dot-style" id="">
             <option value="">Default</option>
             <option value="">Square</option>
@@ -69,16 +79,16 @@
           </select>
         </div>
         <div class="field__color">
-          <label for="">Color</label>
+          <!-- <label for="">Color</label> -->
           <input type="color" value="#182c2b">
         </div>
       </fieldset>
       <fieldset class="field">
         <legend class="field__header">
-          Corners Dot Options
+          Corners Dot
         </legend>
         <div class="field__style">
-          <label for="">Style</label>
+          <!-- <label for="">Style</label> -->
           <select name="dot-style" id="">
             <option value="">Default</option>
             <option value="">Square</option>
@@ -86,30 +96,30 @@
           </select>
         </div>
         <div class="field__color">
-          <label for="">Color</label>
+          <!-- <label for="">Color</label> -->
           <input type="color" value="#d53839">
         </div>
       </fieldset>
-      <fieldset class="field field--small">
+      <fieldset class="field">
         <legend class="field__header">
           Background
         </legend>
         <div class="field__color">
-          <label for="">Color</label>
+          <!-- <label for="">Color</label> -->
           <input type="color" value="#fffffd">
         </div>
       </fieldset>
-      <fieldset class="field field--small">
+      <fieldset class="field">
         <legend class="field__header">
           Image
         </legend>
         <div class="field__color">
-          <label for="">Color</label>
-          <input type="color" value="#d53839">
+          <!-- <label for="">Color</label> -->
+          <input type="color" id="ff" value="#d53839">
         </div>
       </fieldset>
-      <button class="button">GENERATE</button>
-      <div class="qr"></div>
+        </div>
+      </div>
     </main>
   </div>
 </body>
