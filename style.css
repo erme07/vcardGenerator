@@ -3,10 +3,17 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+:root{
+  --backColor:#fffffd;
+  --textColor:#182c2b;
+  --mainColor:#f8ad26;
+  --accentColor:#d53839;
+}
 body{
-  background-color: aquamarine;
+  background-color: var(--mainColor);
   font-family: poppins;
+  font-size: 12px;
+  color: var(--textColor);
 }
 .title{
   text-transform: uppercase;
@@ -16,16 +23,19 @@ body{
   margin-bottom: 30px;
 }
 .container{
-  width: 700px;
+  width: 600px;
   margin: 50px auto;
-  background-color: aliceblue;
+  background-color: var(--backColor);
   padding: 20px;
   border-radius: 10px;
 }
 main{
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 10px;
+  row-gap: 20px;
 }
 .data{
   display: flex;
@@ -33,22 +43,69 @@ main{
   flex-wrap: wrap;
   gap: 5px;
 }
-.data__header, .options__header{
+.data__header{
   flex-basis: 100%;
 }
 .data__input{
   padding: 5px;
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--textColor);
   flex-basis: calc(50% - 5px);
   
 }
-.data__title, .options__title{
+.data__title, .field__title{
   display: inline-block;
-  font-size: 12px;
+  font-size: 15px;
+  font-weight: bold;
 }
 .sep{
   display: inline-block;
   flex-grow: 1;
   border-bottom: 1px solid black;
+}
+.field{
+  width: calc(50% - 5px);
+  padding: 10px 15px;
+  display: flex;
+  border-radius: 10px;
+  align-items: center;
+  justify-content:space-around;
+  border-color: var(--textColor);
+  border-style: solid;
+  border-width: 1px;
+}
+.field--small{
+  width: calc(25% - 10px);
+}
+legend{
+  background-color: var(--accentColor);
+  padding: 3px 6px;
+  border-radius: 5px;
+  color: white;
+}
+.field__color, .field__style{
+  display: flex;
+  align-items: center;
+}
+.field__style{
+  gap: 5px;
+}
+.field__color input{
+  width: 30px;
+  height: 30px;
+  border: none;
+}
+.button{
+  background-color: var(--accentColor);
+  color: var(--backColor);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.qr{
+  flex-basis: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--textColor);
 }

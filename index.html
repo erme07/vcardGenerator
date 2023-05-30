@@ -23,18 +23,80 @@
         <input class="data__input" type="email" placeholder="e-mail">
         <input class="data__input" type="tel" placeholder="Phone">
       </div>
-      <div class="options">
-        <div class="options__header">
-          <h3 class="options__title">Options</h3>
-        </div>
-        <div class="dots">
-          <label for="">Dot Style</label>
+      <fieldset class="field">
+        <legend class="field__header">
+          Dots Options
+        </legend>
+        <div class="field__style">
+          <label for="">Style</label>
           <select name="dot-style" id="">
-            <option value="">Rounded</option>
             <option value="">Square</option>
+            <option value="">Dots</option>
+            <option value="">Rounded</option>
+            <option value="">Extra Rounded</option>
+            <option value="">Classy</option>
+            <option value="">Classy Rounded</option>
           </select>
         </div>
-      </div>
+        <div class="field__color">
+          <label for="">Color</label>
+          <input type="color" value="#182c2b">
+        </div>
+      </fieldset>
+      <fieldset class="field">
+        <legend class="field__header">
+          Corners Square Options
+        </legend>
+        <div class="field__style">
+          <label for="">Style</label>
+          <select name="dot-style" id="">
+            <option value="">Default</option>
+            <option value="">Square</option>
+            <option value="">Extra Rounded</option>
+            <option value="">Dot</option>
+          </select>
+        </div>
+        <div class="field__color">
+          <label for="">Color</label>
+          <input type="color" value="#182c2b">
+        </div>
+      </fieldset>
+      <fieldset class="field">
+        <legend class="field__header">
+          Corners Dot Options
+        </legend>
+        <div class="field__style">
+          <label for="">Style</label>
+          <select name="dot-style" id="">
+            <option value="">Default</option>
+            <option value="">Square</option>
+            <option value="">Dot</option>
+          </select>
+        </div>
+        <div class="field__color">
+          <label for="">Color</label>
+          <input type="color" value="#d53839">
+        </div>
+      </fieldset>
+      <fieldset class="field field--small">
+        <legend class="field__header">
+          Background
+        </legend>
+        <div class="field__color">
+          <label for="">Color</label>
+          <input type="color" value="#fffffd">
+        </div>
+      </fieldset>
+      <fieldset class="field field--small">
+        <legend class="field__header">
+          Image
+        </legend>
+        <div class="field__color">
+          <label for="">Color</label>
+          <input type="color" value="#d53839">
+        </div>
+      </fieldset>
+      <button class="button">GENERATE</button>
       <div class="qr"></div>
     </main>
   </div>
