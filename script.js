@@ -1,8 +1,52 @@
-const datos = document.getElementById("data");
-const foo = document.getElementById("ff");
+const data = document.querySelectorAll(".data__input");
+const optionInputs = document.querySelectorAll("select, input[type='color']");
 
-datos.addEventListener("change", (e) => {
-  console.log(e.target.value);
+const options = document.querySelector(".options");
+
+function enableOptions() {
+  Array.from(optionInputs).forEach((e) => {
+    e.disabled = false;
+  })
+}
+function disableOptions() {
+  Array.from(optionInputs).forEach((e) => {
+    e.disabled = true;
+  })
+}
+
+function clearData() {
+  Array.from(data).forEach((e) => {
+    e.value = "";
+  })
+}
+
+options.addEventListener("change", (e) => {
+  let inputValue = "";
+  if (e.target.getAttribute("name") === "dotStyle") {
+    inputValue = e.target.value;
+  }
+  if (e.target.getAttribute("name") === "dotColor") {
+    inputValue = e.target.value;
+  }
+  if (e.target.getAttribute("name") === "cornerStyle") {
+    inputValue = e.target.value;
+  }
+  if (e.target.getAttribute("name") === "cornerColor") {
+    inputValue = e.target.value;
+  }
+  if (e.target.getAttribute("name") === "cornerDotStyle") {
+    inputValue = e.target.value;
+  }
+  if (e.target.getAttribute("name") === "cornerDotColor") {
+    inputValue = e.target.value;
+  }
+  if (e.target.getAttribute("name") === "backgroundColor") {
+    inputValue = e.target.value;
+  }
+  if (e.target.getAttribute("name") === "imageColor") {
+    inputValue = e.target.value;
+  }
+  generateQR(inputValue);
 })
 
 var colore = "#d53839";

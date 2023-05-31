@@ -8,6 +8,7 @@
   --textColor:#182c2b;
   --mainColor:#f8ad26;
   --accentColor:#d53839;
+  --greyColor:#e9e9e9;
 }
 body{
   background-color: var(--mainColor);
@@ -44,32 +45,48 @@ main{
   display: flex;
   flex-basis: 100%;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 5px 10px;
 }
 .data__header{
   flex-basis: 100%;
+  position: relative;
+}
+.data__header::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 50%;
+  border-bottom: 2px solid var(--textColor);
 }
 .data__input{
   padding: 5px;
   border: none;
   border-bottom: 2px solid var(--textColor);
   flex-basis: calc(50% - 5px);
-  
+  transition: background-color .3s;
 }
-.data__title, .field__title{
+.data__input:focus-visible{
+  outline: none;
+  background-color: var(--greyColor);
+}
+.data__title{
   display: inline-block;
   font-size: 15px;
   font-weight: bold;
+  position: relative;
+  background-color: var(--backColor);
+  padding-left: 7px;
+  padding-right: 7px;
+  margin-left: 20px;
 }
-.sep{
-  display: inline-block;
-  flex-grow: 1;
-  border-bottom: 1px solid black;
-}
+
 .field{
   padding: 3px 10px;
+  padding-bottom: 5px;
   display: flex;
-  border-radius: 10px;
+  border-radius: 5px;
   align-items: center;
   justify-content:space-around;
   border-color: var(--textColor);
@@ -90,18 +107,19 @@ legend{
   display: flex;
   align-items: center;
 }
-
+.field__style select:focus-visible{
+  outline: none;
+}
 .field__color input{
-  width: 30px;
-  height: 30px;
-  border: none;
+  width: 25px;
+  height: 25px;
 }
 
 
 .content{
   flex-basis: 100%;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   outline: 1px solid var(--textColor);
   display: flex;
   flex-wrap: wrap;
@@ -128,7 +146,7 @@ legend{
 .qr{
   flex-basis: 300px;
   height: 300px;
-  background-color:lightgray;
+  background-color:var(--greyColor);
 }
 .options{
   flex-basis: min-content;
