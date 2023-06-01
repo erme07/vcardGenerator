@@ -32,19 +32,19 @@
         <div class="data__header">
           <h3 class="data__title">Personal Data</h3>
         </div>
-        <input class="data__input" type="text" name="Name" placeholder="Name">
+        <input class="data__input" type="text" name="Name" placeholder="Name*">
         <input class="data__input" type="text" name="LastName" placeholder="Last Name">
-        <input class="data__input" type="tel" name="Phone" placeholder="Phone">
+        <input class="data__input" type="tel" name="Phone" placeholder="Phone*">
         <input class="data__input" type="email" name="Email" placeholder="e-mail">
       </div>
       <div class="content">
         <div class="info">
-          <div class="info__message">Ingrese los datos y genere el codigo</div>
+          <div class="info__message">Enter the data to generate the code</div>
         </div>
         <div class="button">
-          <button class="button__generate" id="generateQr">GENERATE</button>
-          <button class="button__clear" id="clear">CLEAR</button>
-          <button class="button__download" id="download">DOWNLOAD</button>
+          <button class="button__element" id="generateQr" disabled>GENERATE</button>
+          <button class="button__element" id="clear" disabled>CLEAR</button>
+          <button class="button__element" id="download" disabled>DOWNLOAD</button>
         </div>
         <div class="qr" id="qr"></div>
         <div class="options">
