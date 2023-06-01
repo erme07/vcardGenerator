@@ -15,12 +15,21 @@ const optionImgColor = document.querySelector("[name = 'imageColor']");
 const options = document.querySelectorAll("select, input[type='color']");
 
 const buttons = document.querySelector(".button")
+const buttonGenerateQr = document.getElementById("generateQr");
+const buttonClear = document.getElementById("clear");
 const qrContainer = document.getElementById("qr");
+const message = document.querySelector(".info__message");
 
 const regexNames = /^[A-Za-zñÑáéíóúÁÉÍÓÚ]{1,15}$/i;
 const regexPhone = /^\+?\d{1,15}$/;
 const regexMail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
+const inputError = {
+  input_name: null,
+  input_lastName: null,
+  input_phone: null,
+  input_email: null
+}
 let settingQR = {};
 let vcard = vcardTemplate();
 
@@ -114,31 +123,77 @@ function clear() {
   Array.from($data).forEach((e) => {
     e.value = "";
   })
+  Array.from($data).forEach((e) => {
+    e.classList.remove("data__input--error")
+    e.classList.remove("data__input--succes")
+  })
   vcard = vcardTemplate();
   settingQR.data = vcard;
   qrCode = new QRCodeStyling(settingQR);
   disableOptions();
+  buttonClear.disabled = true
+  message.classList.remove("info__message--error")
+  message.innerHTML = "Enter the data to generate the code"
+
 }
 
 function checkData(element) {
-  let regExpresion = "";
-  if ((element.getAttribute("name") === "Name") || (element.getAttribute("name") === "LastName")) {
-    regExpresion = regexNames;
+  const objectElement = {
+    regExpresion: "",
+    checkElement() {
+      if (this.regExpresion.test(element.value)) {
+        element.classList.add("data__input--succes")
+        element.classList.remove("data__input--error")
+        return true;
+      } else if (element.value === "") {
+        element.classList.remove("data__input--error")
+        element.classList.remove("data__input--succes")
+        return null
+      } else {
+        element.classList.add("data__input--error")
+        element.classList.remove("data__input--succes")
+        message.classList.add("info__message--error")
+        message.innerHTML = "Enter a valid value"
+        return false;
+      }
+    },
+    checkError() {
+      if (!Object.values(inputError).includes(false)) {
+        message.classList.remove("info__message--error")
+        message.innerHTML = "Enter the data to generate the code"
+      }
+    }
+  }
+  if (element.getAttribute("name") === "Name") {
+    objectElement.regExpresion = regexNames;
+    inputError.input_name = objectElement.checkElement()
+    objectElement.checkError();
+  }
+  if (element.getAttribute("name") === "LastName") {
+    objectElement.regExpresion = regexNames;
+    inputError.input_lastName = objectElement.checkElement()
+    objectElement.checkError();
   }
   if (element.getAttribute("name") === "Phone") {
-    regExpresion = regexPhone;
+    objectElement.regExpresion = regexPhone;
+    inputError.input_phone = objectElement.checkElement()
+    objectElement.checkError();
   }
   if (element.getAttribute("name") === "Email") {
-    regExpresion = regexMail;
+    objectElement.regExpresion = regexMail;
+    inputError.input_email = objectElement.checkElement()
+    objectElement.checkError();
   }
-  if (regExpresion.test(element.value)) {
-    element.classList.add("data__input--succes")
-    element.classList.remove("data__input--error")
+  if (!Object.values(inputError).includes(false) && $dataName.value && $dataPhone.value) {
+    buttonGenerateQr.disabled = false;
   } else {
-    element.classList.add("data__input--error")
-    element.classList.remove("data__input--succes")
+    buttonGenerateQr.disabled = true;
   }
-
+  if (Object.values(inputError).includes(true) || Object.values(inputError).includes(false)) {
+    buttonClear.disabled = false
+  } else {
+    buttonClear.disabled = true
+  }
 }
 
 document.getElementById("data").addEventListener("change", (e) => {
