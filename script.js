@@ -30,8 +30,9 @@ const inputError = {
   input_phone: null,
   input_email: null
 }
-let settingQR = {};
-let vcard = vcardTemplate();
+
+let qrCode = "";
+
 
 function vcardTemplate() {
   return `BEGIN:VCARD
@@ -40,45 +41,17 @@ N:${$dataLastName.value};${$dataName.value}
 FN:${$dataName.value} ${$dataLastName.value}
 TEL;CELL:${$dataPhone.value}
 EMAIL:${$dataEmail.value}
-END:VCARD`;
+END:VCARD`
 }
 
-let imgcon = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-<path fill="${encodeURIComponent(optionImgColor.value)}" d="M0 96l576 0c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96zm0 32V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128H0zM64 405.3c0-29.5 23.9-53.3 53.3-53.3H234.7c29.5 0 53.3 23.9 53.3 53.3c0 5.9-4.8 10.7-10.7 10.7H74.7c-5.9 0-10.7-4.8-10.7-10.7zM176 192a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm176 16c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16z"/></svg>`;
-
-
-
-
-
-
-settingQR = {
-  type: "svg",
-  data: vcard,
-  image: imgcon,
-  imageOptions: {
-    imageSize: 0.3,
-    margin: 3
-  },
-  dotsOptions: {
-    type: optionDotStyle.value,
-    color: optionDotColor.value
-  },
-  backgroundOptions: {
-    color: optionBgColor.value
-  },
-  cornersSquareOptions: {
-    type: optionSquareStyle.value,
-    color: optionSquareColor.value
-  },
-  cornersDotOptions: {
-    type: optionSquareDotStyle.value,
-    color: optionSquareDotColor.value
-  },
+function imgTemplate() {
+  return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+<path fill="${encodeURIComponent(optionImgColor.value)}" d="M0 96l576 0c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96zm0 32V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128H0zM64 405.3c0-29.5 23.9-53.3 53.3-53.3H234.7c29.5 0 53.3 23.9 53.3 53.3c0 5.9-4.8 10.7-10.7 10.7H74.7c-5.9 0-10.7-4.8-10.7-10.7zM176 192a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm176 16c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16z"/></svg>`
 }
-let qrCode = new QRCodeStyling(settingQR);
 
 buttons.addEventListener("click", (e) => {
   if (e.target.getAttribute("id") === "generateQr") {
+    enableOptions();
     if (!qrContainer.innerHTML) {
       generateQR();
     } else {
@@ -95,27 +68,58 @@ buttons.addEventListener("click", (e) => {
 
 
 function generateQR() {
-  if (validateData()) {
-    qrCode.append(qrContainer);
-    enableOptions();
-  } else {
-    dataError();
-  }
+  qrCode = new QRCodeStyling(getValues());
+  qrCode.append(qrContainer)
 }
 
-function validateData() {
-  return true;
+function updateQR() {
+  qrCode.update(getValues())
+}
+
+function getValues() {
+  return {
+    type: "svg",
+    data: vcardTemplate(),
+    image: imgTemplate(),
+    imageOptions: {
+      imageSize: 0.3,
+      margin: 3
+    },
+    dotsOptions: {
+      type: optionDotStyle.value,
+      color: optionDotColor.value
+    },
+    backgroundOptions: {
+      color: optionBgColor.value
+    },
+    cornersSquareOptions: {
+      type: optionSquareStyle.value,
+      color: optionSquareColor.value
+    },
+    cornersDotOptions: {
+      type: optionSquareDotStyle.value,
+      color: optionSquareDotColor.value
+    }
+  }
 }
 
 function enableOptions() {
   Array.from(options).forEach((e) => {
-    e.disabled = false;
+    enableItem(e)
   })
 }
 function disableOptions() {
   Array.from(options).forEach((e) => {
-    e.disabled = true;
+    disableItem(e)
   })
+}
+
+function disableItem(item) {
+  item.disabled = true;
+}
+
+function enableItem(item) {
+  item.disabled = false;
 }
 
 function clear() {
@@ -127,11 +131,9 @@ function clear() {
     e.classList.remove("data__input--error")
     e.classList.remove("data__input--succes")
   })
-  vcard = vcardTemplate();
-  settingQR.data = vcard;
-  qrCode = new QRCodeStyling(settingQR);
   disableOptions();
-  buttonClear.disabled = true
+  disableItem(buttonClear)
+  disableItem(buttonGenerateQr)
   message.classList.remove("info__message--error")
   message.innerHTML = "Enter the data to generate the code"
 
@@ -184,18 +186,20 @@ function checkData(element) {
     inputError.input_email = objectElement.checkElement()
     objectElement.checkError();
   }
-  if (!Object.values(inputError).includes(false) && $dataName.value && $dataPhone.value) {
-    buttonGenerateQr.disabled = false;
-  } else {
-    buttonGenerateQr.disabled = true;
-  }
-  if (Object.values(inputError).includes(true) || Object.values(inputError).includes(false)) {
-    buttonClear.disabled = false
-  } else {
-    buttonClear.disabled = true
-  }
+  if (!Object.values(inputError).includes(false) && $dataName.value && $dataPhone.value)
+    enableItem(buttonGenerateQr)
+  else
+    disableItem(buttonGenerateQr)
+  if (Object.values(inputError).includes(true) || Object.values(inputError).includes(false))
+    enableItem(buttonClear)
+  else
+    disableItem(buttonClear)
 }
 
-document.getElementById("data").addEventListener("change", (e) => {
-  checkData(e.target);
+document.addEventListener("change", (e) => {
+  if (e.target.classList.contains("data__input")) {
+    checkData(e.target);
+  } else {
+    updateQR()
+  }
 })
