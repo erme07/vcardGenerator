@@ -12,11 +12,13 @@ const optionSquareDotStyle = document.querySelector("[name = 'cornerDotStyle']")
 const optionSquareDotColor = document.querySelector("[name = 'cornerDotColor']");
 const optionBgColor = document.querySelector("[name = 'backgroundColor']");
 const optionImgColor = document.querySelector("[name = 'imageColor']");
+const optionExtension = document.querySelector("[name='extension']");
 const options = document.querySelectorAll("select, input[type='color']");
 
 const buttons = document.querySelector(".button")
 const buttonGenerateQr = document.getElementById("generateQr");
 const buttonClear = document.getElementById("clear");
+const buttonDownload = document.getElementById("download");
 const qrContainer = document.getElementById("qr");
 const message = document.querySelector(".info__message");
 
@@ -52,6 +54,7 @@ function imgTemplate() {
 buttons.addEventListener("click", (e) => {
   if (e.target.getAttribute("id") === "generateQr") {
     enableOptions();
+    enableItem(buttonDownload)
     if (!qrContainer.innerHTML) {
       generateQR();
     } else {
@@ -62,10 +65,15 @@ buttons.addEventListener("click", (e) => {
     clear();
   }
   if (e.target.getAttribute("id") === "download") {
-    download();
+    downloadQR();
   }
 })
-
+function downloadQR() {
+  qrCode.download({
+    name: "vCard",
+    extension: optionExtension.value
+  })
+}
 
 function generateQR() {
   qrCode = new QRCodeStyling(getValues());
@@ -134,6 +142,7 @@ function clear() {
   disableOptions();
   disableItem(buttonClear)
   disableItem(buttonGenerateQr)
+  disableItem(buttonDownload)
   message.classList.remove("info__message--error")
   message.innerHTML = "Enter the data to generate the code"
 
@@ -199,7 +208,7 @@ function checkData(element) {
 document.addEventListener("change", (e) => {
   if (e.target.classList.contains("data__input")) {
     checkData(e.target);
-  } else {
+  } else if (e.target.getAttribute("name") != "extension") {
     updateQR()
   }
 })
