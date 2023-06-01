@@ -13,28 +13,28 @@
   --errorColor:#ffaaaa;
 }
 body{
-  background-color: var(--mainColor);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: poppins;
   font-size: 12px;
   color: var(--textColor);
-  display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-.title{
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 15px;
+  background-color: var(--mainColor);
 }
 .container{
   width: 600px;
-  background-color: var(--backColor);
   padding: 20px;
   border-radius: 10px;
+  background-color: var(--backColor);
   box-shadow: 0px 0px 20px 0px var(--textColor);
+}
+.title{
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
 }
 main{
   display: flex;
@@ -43,14 +43,14 @@ main{
   gap: 45px;
 }
 .data{
-  display: flex;
   flex-basis: 100%;
+  display: flex;
   flex-wrap: wrap;
   gap: 5px 10px;
 }
 .data__header{
-  flex-basis: 100%;
   position: relative;
+  flex-basis: 100%;
 }
 .data__header::before{
   content: "";
@@ -61,87 +61,50 @@ main{
   height: 50%;
   border-bottom: 2px solid var(--textColor);
 }
+.data__title{
+  position: relative;
+  display: inline-block;
+  padding-left: 7px;
+  padding-right: 7px;
+  margin-left: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--backColor);
+}
 .data__input{
+  flex-basis: calc(50% - 5px);
   padding: 5px;
   border: none;
   border-bottom: 2px solid var(--textColor);
-  flex-basis: calc(50% - 5px);
   transition: background-color .3s;
 }
 .data__input:focus-visible{
   outline: none;
   background-color: var(--greyColor);
 }
-
 .data__input--error, .data__input--error:focus-visible{
   background-color: var(--errorColor);
 }
 .data__input--succes, .data__input--succes:focus-visible{
   background-color: var(--succesColor);
 }
-.data__title{
-  display: inline-block;
-  font-size: 15px;
-  font-weight: bold;
-  position: relative;
-  background-color: var(--backColor);
-  padding-left: 7px;
-  padding-right: 7px;
-  margin-left: 20px;
-}
-
-.field{
-  padding: 3px 10px;
-  padding-bottom: 5px;
-  display: flex;
-  border-radius: 5px;
-  align-items: center;
-  justify-content:space-around;
-  border-color: var(--textColor);
-  border-style: solid;
-  border-width: 1px;
-  flex-grow: 1;
-}
-.field--small{
-  width: 50%;
-}
-legend{
-  background-color: var(--accentColor);
-  padding: 1px 6px;
-  border-radius: 5px;
-  color: white;
-}
-.field__color, .field__style{
-  display: flex;
-  align-items: center;
-}
-.field__style select:focus-visible{
-  outline: none;
-}
-.field__color input{
-  width: 25px;
-  height: 25px;
-}
-
-
 .content{
-  flex-basis: 100%;
-  padding: 20px;
-  border-radius: 5px;
-  outline: 1px solid var(--textColor);
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  border-radius: 5px;
+  outline: 1px solid var(--textColor);
   gap: 20px;
-  position: relative;
 }
 .info{
   position: absolute;
   left: 0;
+  top: -30px;
   width: 100%;
   height: 20px;
-  top: -30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,12 +114,8 @@ legend{
   font-weight: bold;
   text-transform: uppercase;
 }
-.info__message--error{
-  background-color: var(--errorColor);
-}
-.info__message--success{
-  background-color: var(--succesColor);
-}
+.info__message--error {background-color: var(--errorColor);}
+.info__message--success {background-color: var(--succesColor);}
 
 .button{
   flex-basis: 100%;
@@ -167,18 +126,43 @@ legend{
   gap: 20px;
 }
 .button__element{
-  background-color: var(--accentColor);
-  color: var(--backColor);
-  border: none;
   padding: 10px;
+  border: none;
   border-radius: 5px;
-  transition: background-color .3s;
+  color: var(--backColor);
+  background-color: var(--accentColor);
   cursor: pointer;
+  transition: background-color .3s;
 }
-
 .button__element[disabled]{
   background-color: var(--errorColor);
   cursor: default;
+}
+
+.field{
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content:space-around;
+  padding: 3px 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--textColor);
+}
+legend{
+  padding: 1px 6px;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--accentColor);
+}
+.field__item{
+  display: flex;
+  align-items: center;
+}
+.field__item:focus-visible {outline: none;}
+.field__item[type="color"]{
+  width: 25px;
+  height: 25px;
 }
 
 .qr{
@@ -186,6 +170,7 @@ legend{
   height: 300px;
   background-color:var(--greyColor);
 }
+
 .options{
   flex-basis: min-content;
   display: flex;
@@ -195,64 +180,43 @@ legend{
   flex-grow: 1;
 }
 
-
-
-
-
-
-
-
+/* :::::: STYLES FOR GITHUB LINK :::::: */
 
 .repo-link{
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 80px;
-    height: 80px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
 }
-.main-color{
-  fill: var(--accentColor);
-}
-.second-color{
-  fill: var(--backColor);
-}
-.arm{
-    transform-origin: 130px 106px;
-}
-.icon:hover .arm{
-    animation: arm-movement .6s ease-in-out;
-}
+.main-color {fill: var(--accentColor);}
+.second-color {fill: var(--backColor);}
+.arm {transform-origin: 130px 106px;}
+.icon:hover .arm {animation: arm-movement .6s ease-in-out;}
+
 @keyframes arm-movement {
-    0%, 100% {
-        transform: rotate(0);
-    }
-    20%, 60% {
-        transform: rotate(-25deg);
-    }
-    40%, 80% {
-        transform: rotate(10deg);
-    }
+  0%, 100% {transform: rotate(0);}
+  20%, 60% {transform: rotate(-25deg);}
+  40%, 80% {transform: rotate(10deg);}
 }
 
+/* :::::: MEDIA QUERIES :::::: */
 
 @media screen and (max-width: 480px){
   .content{
-    outline: none;
     padding: 0;
+    outline: none;
   }
-  .button{
-    gap: 10px;
-  }
-  .data__input{
-    flex-basis: 100%;
-  }
+  .button {gap: 10px;}
+  .data__input {flex-basis: 100%;}
 }
+
 @media screen and (max-width: 600px) {
   .container{
     width: 100%;
+    padding: 20px 10px;
     border-radius: 0;
     box-shadow: none;
-    padding: 20px 10px;
   }
   .repo-link{
     width: 60px;
