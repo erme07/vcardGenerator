@@ -5,25 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
   <script src="script.js" defer></script>
   <title>VCard Generator</title>
 </head>
 <body>
-  <svg class="repo-link" viewBox="0 0 250 250"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:svg="http://www.w3.org/2000/svg">
-        <title>Repositorio en Github</title>
-        <a href="https://github.com/erme07/proyectos-SVG/tree/master/customAmongus">
-            <g class="icon">
-                <path class="main-color" d="M 0,0 250,250 V 0 Z"/>
-                <path class="second-color arm" d="M 128.3,109 C 113.8,99.7 119,89.6 119,89.6 c 3,-6.9 1.5,-11 1.5,-11 -1.3,-6.6 2.9,-2.3 2.9,-2.3 3.9,4.6 2.1,11 2.1,11 -2.6,10.3 5.1,14.6 8.9,15.9"/>
-                <path class="second-color" d="m 115,115 c -0.1,0.1 3.7,1.5 4.8,0.4 l 13.9,-13.8 c 3.2,-2.4 6.2,-3.2 8.5,-3 -8.4,-10.6 -14.7,-24.2 1.6,-40.6 4.7,-4.6 10.2,-6.8 15.9,-7 0.6,-1.6 3.5,-7.4 11.7,-10.9 0,0 4.7,2.4 7.4,16.1 4.3,2.4 8.4,5.6 12.1,9.2 3.6,3.6 6.8,7.8 9.2,12.2 13.7,2.6 16.2,7.3 16.2,7.3 -3.6,8.2 -9.4,11.1 -10.9,11.7 -0.3,5.8 -2.4,11.2 -7.1,15.9 -16.4,16.4 -30,10 -40.6,1.6 0.2,2.8 -1,6.8 -5,10.8 L 141,136.5 c -1.2,1.2 0.6,5.4 0.8,5.3 z"/>
-            </g>
-        </a>
+  <svg class="repo-link" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+    <title>Repositorio en Github</title>
+    <a href="https://github.com/erme07/proyectos-SVG/tree/master/customAmongus">
+      <g class="icon">
+        <path class="main-color" d="M 0,0 250,250 V 0 Z"/>
+        <path class="second-color arm" d="M 128.3,109 C 113.8,99.7 119,89.6 119,89.6 c 3,-6.9 1.5,-11 1.5,-11 -1.3,-6.6 2.9,-2.3 2.9,-2.3 3.9,4.6 2.1,11 2.1,11 -2.6,10.3 5.1,14.6 8.9,15.9"/>
+        <path class="second-color" d="m 115,115 c -0.1,0.1 3.7,1.5 4.8,0.4 l 13.9,-13.8 c 3.2,-2.4 6.2,-3.2 8.5,-3 -8.4,-10.6 -14.7,-24.2 1.6,-40.6 4.7,-4.6 10.2,-6.8 15.9,-7 0.6,-1.6 3.5,-7.4 11.7,-10.9 0,0 4.7,2.4 7.4,16.1 4.3,2.4 8.4,5.6 12.1,9.2 3.6,3.6 6.8,7.8 9.2,12.2 13.7,2.6 16.2,7.3 16.2,7.3 -3.6,8.2 -9.4,11.1 -10.9,11.7 -0.3,5.8 -2.4,11.2 -7.1,15.9 -16.4,16.4 -30,10 -40.6,1.6 0.2,2.8 -1,6.8 -5,10.8 L 141,136.5 c -1.2,1.2 0.6,5.4 0.8,5.3 z"/>
+      </g>
+    </a>
   </svg>
   <div class="container">
     <h1 class="title">VCard Generator</h1>
@@ -52,67 +51,62 @@
             <legend class="field__header">
               Dots Options
             </legend>
-            <div class="field__style">
-              <select name="dotStyle" disabled>
+            <select class="field__item" name="dotStyle" disabled>
                 <option value="square">Square</option>
                 <option value="dots">Dots</option>
                 <option value="rounded">Rounded</option>
                 <option value="extra-rounded">Extra Rounded</option>
                 <option value="classy">Classy</option>
                 <option value="classy-rounded">Classy Rounded</option>
-              </select>
-            </div>
-            <div class="field__color">
-              <input type="color" name="dotColor" value="#182c2b" disabled>
-            </div>
-        </fieldset>
-        <fieldset class="field">
-          <legend class="field__header">
-            Corners Square
-          </legend>
-          <div class="field__style">
-            <select name="cornerStyle" disabled>
+            </select>
+            <input class="field__item" type="color" name="dotColor" value="#182c2b" disabled>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="field__header">
+              Corners Square
+            </legend>
+            <select class="field__item" name="cornerStyle" disabled>
               <option value="">Default</option>
               <option value="square">Square</option>
               <option value="extra-rounded">Extra Rounded</option>
               <option value="dot">Dot</option>
             </select>
-          </div>
-          <div class="field__color">
-            <input type="color" name="cornerColor" value="#182c2b" disabled>
-          </div>
-        </fieldset>
-        <fieldset class="field">
-          <legend class="field__header">
-            Corners Dot
-          </legend>
-          <div class="field__style">
-            <select name="cornerDotStyle" disabled>
+            <input class="field__item" type="color" name="cornerColor" value="#182c2b" disabled>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="field__header">
+              Corners Dot
+            </legend>
+            <select class="field__item" name="cornerDotStyle" disabled>
               <option value="">Default</option>
               <option value="square">Square</option>
               <option value="dot">Dot</option>
             </select>
-          </div>
-          <div class="field__color">
-            <input type="color" name="cornerDotColor" value="#d53839" disabled>
-          </div>
-        </fieldset>
-        <fieldset class="field">
-          <legend class="field__header">
-            Background
-          </legend>
-          <div class="field__color">
-            <input type="color" name="backgroundColor" value="#fffffd" disabled>
-          </div>
-        </fieldset>
-        <fieldset class="field">
-          <legend class="field__header">
-            Image
-          </legend>
-          <div class="field__color">
-            <input type="color" name="imageColor" value="#d53839" disabled>
-          </div>
-        </fieldset>
+            <input class="field__item" type="color" name="cornerDotColor" value="#d53839" disabled>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="field__header">
+              Icon
+            </legend>
+            <input class="field__item" type="color" name="imageColor" value="#d53839" disabled>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="field__header">
+              Bg Color
+            </legend>
+            <input class="field__item" type="color" name="backgroundColor" value="#fffffd" disabled>
+          </fieldset>
+          <fieldset class="field">
+            <legend class="field__header">
+              Download
+            </legend>
+            <select class="field__item" name="extension" disabled>
+              <option value="png">png</option>
+              <option value="jpeg">jpeg</option>
+              <option value="svg">svg</option>
+              <option value="webp">webp</option>
+            </select>
+          </fieldset>
         </div>
       </div>
     </main>
