@@ -151,6 +151,12 @@ legend{
   font-weight: bold;
   text-transform: uppercase;
 }
+.info__message--error{
+  background-color: var(--errorColor);
+}
+.info__message--success{
+  background-color: var(--succesColor);
+}
 
 .button{
   flex-basis: 100%;
@@ -160,12 +166,19 @@ legend{
   justify-content: center;
   gap: 20px;
 }
-.button__generate, .button__clear, .button__download{
+.button__element{
   background-color: var(--accentColor);
   color: var(--backColor);
   border: none;
   padding: 10px;
   border-radius: 5px;
+  transition: background-color .3s;
+  cursor: pointer;
+}
+
+.button__element[disabled]{
+  background-color: var(--errorColor);
+  cursor: default;
 }
 
 .qr{
