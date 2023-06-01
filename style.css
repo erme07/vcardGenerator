@@ -9,6 +9,8 @@
   --mainColor:#f8ad26;
   --accentColor:#d53839;
   --greyColor:#e9e9e9;
+  --succesColor:#b3ff78;
+  --errorColor:#ffaaaa;
 }
 body{
   background-color: var(--mainColor);
@@ -25,11 +27,10 @@ body{
   text-align: center;
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 .container{
   width: 600px;
-  /* margin: 20px auto; */
   background-color: var(--backColor);
   padding: 20px;
   border-radius: 10px;
@@ -39,7 +40,7 @@ main{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 30px;
+  gap: 45px;
 }
 .data{
   display: flex;
@@ -70,6 +71,13 @@ main{
 .data__input:focus-visible{
   outline: none;
   background-color: var(--greyColor);
+}
+
+.data__input--error, .data__input--error:focus-visible{
+  background-color: var(--errorColor);
+}
+.data__input--succes, .data__input--succes:focus-visible{
+  background-color: var(--succesColor);
 }
 .data__title{
   display: inline-block;
@@ -126,7 +134,24 @@ legend{
   align-items: center;
   justify-content: center;
   gap: 20px;
+  position: relative;
 }
+.info{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  top: -30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info__message{
+  padding: 2px 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .button{
   flex-basis: 100%;
   display: flex;
