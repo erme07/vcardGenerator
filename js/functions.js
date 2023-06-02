@@ -1,6 +1,5 @@
 const $data = document.querySelectorAll(".data__input"),
   $options = document.querySelectorAll("select, input[type='color']"),
-  $buttons = document.querySelector(".button"),
   $buttonGenerateQr = document.getElementById("generateQr"),
   $buttonClear = document.getElementById("clear"),
   $buttonDownload = document.getElementById("download"),
@@ -145,24 +144,15 @@ const downloadQR = () => {
     extension: Array.from($options)[getIndex($options, "extension")].value
   })
 }
-
-document.addEventListener("change", (e) => {
-  if (e.target.classList.contains("data__input"))
-    checkData(e.target);
-  else if (e.target.getAttribute("name") != "extension")
-    updateQR()
-})
-$buttons.addEventListener("click", (e) => {
-  if (e.target.getAttribute("id") === "generateQr") {
-    enableOptions();
-    enableItem($buttonDownload)
-    if (!$qrContainer.innerHTML)
-      generateQR();
-    else
-      updateQR();
-  }
-  if (e.target.getAttribute("id") === "clear")
-    clear();
-  if (e.target.getAttribute("id") === "download")
-    downloadQR();
-})
+export default {
+  $qrContainer,
+  $buttonDownload,
+  checkData,
+  updateQR,
+  enableOptions,
+  enableItem,
+  generateQR,
+  updateQR,
+  clear,
+  downloadQR
+}
