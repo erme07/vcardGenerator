@@ -55,19 +55,17 @@ buttons.addEventListener("click", (e) => {
   if (e.target.getAttribute("id") === "generateQr") {
     enableOptions();
     enableItem(buttonDownload)
-    if (!qrContainer.innerHTML) {
+    if (!qrContainer.innerHTML)
       generateQR();
-    } else {
+    else
       updateQR();
-    }
   }
-  if (e.target.getAttribute("id") === "clear") {
+  if (e.target.getAttribute("id") === "clear")
     clear();
-  }
-  if (e.target.getAttribute("id") === "download") {
+  if (e.target.getAttribute("id") === "download")
     downloadQR();
-  }
 })
+
 function downloadQR() {
   qrCode.download({
     name: "vCard",
@@ -148,53 +146,41 @@ function clear() {
 
 }
 
+function checkElement(regExp, element) {
+  if (regExp.test(element.value)) {
+    element.classList.add("data__input--succes")
+    element.classList.remove("data__input--error")
+    return true;
+  } else if (element.value === "") {
+    element.classList.remove("data__input--error")
+    element.classList.remove("data__input--succes")
+    return null
+  } else {
+    element.classList.add("data__input--error")
+    element.classList.remove("data__input--succes")
+    message.classList.add("info__message--error")
+    message.innerHTML = "Enter a valid value"
+    return false;
+  }
+}
+
+function checkError() {
+  if (!Object.values(inputError).includes(false)) {
+    message.classList.remove("info__message--error")
+    message.innerHTML = "Enter the data to generate the code"
+  }
+}
+
 function checkData(element) {
-  const objectElement = {
-    regExpresion: "",
-    checkElement() {
-      if (this.regExpresion.test(element.value)) {
-        element.classList.add("data__input--succes")
-        element.classList.remove("data__input--error")
-        return true;
-      } else if (element.value === "") {
-        element.classList.remove("data__input--error")
-        element.classList.remove("data__input--succes")
-        return null
-      } else {
-        element.classList.add("data__input--error")
-        element.classList.remove("data__input--succes")
-        message.classList.add("info__message--error")
-        message.innerHTML = "Enter a valid value"
-        return false;
-      }
-    },
-    checkError() {
-      if (!Object.values(inputError).includes(false)) {
-        message.classList.remove("info__message--error")
-        message.innerHTML = "Enter the data to generate the code"
-      }
-    }
-  }
-  if (element.getAttribute("name") === "Name") {
-    objectElement.regExpresion = regexNames;
-    inputError.input_name = objectElement.checkElement()
-    objectElement.checkError();
-  }
-  if (element.getAttribute("name") === "LastName") {
-    objectElement.regExpresion = regexNames;
-    inputError.input_lastName = objectElement.checkElement()
-    objectElement.checkError();
-  }
-  if (element.getAttribute("name") === "Phone") {
-    objectElement.regExpresion = regexPhone;
-    inputError.input_phone = objectElement.checkElement()
-    objectElement.checkError();
-  }
-  if (element.getAttribute("name") === "Email") {
-    objectElement.regExpresion = regexMail;
-    inputError.input_email = objectElement.checkElement()
-    objectElement.checkError();
-  }
+  if (element.getAttribute("name") === "Name")
+    inputError.input_name = checkElement(regexNames, element)
+  if (element.getAttribute("name") === "LastName")
+    inputError.input_lastName = checkElement(regexNames, element)
+  if (element.getAttribute("name") === "Phone")
+    inputError.input_phone = checkElement(regexPhone, element)
+  if (element.getAttribute("name") === "Email")
+    inputError.input_email = checkElement(regexMail, element)
+  checkError();
   if (!Object.values(inputError).includes(false) && $dataName.value && $dataPhone.value)
     enableItem(buttonGenerateQr)
   else
@@ -206,9 +192,8 @@ function checkData(element) {
 }
 
 document.addEventListener("change", (e) => {
-  if (e.target.classList.contains("data__input")) {
+  if (e.target.classList.contains("data__input"))
     checkData(e.target);
-  } else if (e.target.getAttribute("name") != "extension") {
+  else if (e.target.getAttribute("name") != "extension")
     updateQR()
-  }
 })
