@@ -14,5 +14,8 @@ vCard is a standard format for the exchange of personal information, specificall
 - You can download the code and choose the extension of the image
 
 ## Preview
+
+![preview](img/preview.jpg)
+
 ## Credits
 This project is built with the [QR Code Styling](https://github.com/kozakdenys/qr-code-styling) library
