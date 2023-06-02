@@ -79,6 +79,15 @@ const clear = () => {
     e.classList.remove("data__input--error")
     e.classList.remove("data__input--succes")
   })
+  Array.from($options)[getIndex($options, "dotStyle")].value = "square"
+  Array.from($options)[getIndex($options, "dotColor")].value = "#182c2b"
+  Array.from($options)[getIndex($options, "cornerStyle")].value = ""
+  Array.from($options)[getIndex($options, "cornerColor")].value = "#182c2b"
+  Array.from($options)[getIndex($options, "cornerDotStyle")].value = ""
+  Array.from($options)[getIndex($options, "cornerDotColor")].value = "#d53839"
+  Array.from($options)[getIndex($options, "imageColor")].value = "#d53839"
+  Array.from($options)[getIndex($options, "backgroundColor")].value = "#fffffd"
+  Array.from($options)[getIndex($options, "extension")].value = "png"
   disableOptions();
   disableItem($buttonClear)
   disableItem($buttonGenerateQr)
