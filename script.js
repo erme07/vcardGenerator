@@ -1,85 +1,58 @@
-const $dataName = document.querySelector("[name='Name']");
-const $dataLastName = document.querySelector("[name='LastName']");
-const $dataEmail = document.querySelector("[name='Email']");
-const $dataPhone = document.querySelector("[name='Phone']");
-const $data = document.querySelectorAll(".data__input");
-
-const optionDotStyle = document.querySelector("[name='dotStyle']");
-const optionDotColor = document.querySelector("[name = 'dotColor']");
-const optionSquareStyle = document.querySelector("[name = 'cornerStyle']");
-const optionSquareColor = document.querySelector("[name = 'cornerColor']");
-const optionSquareDotStyle = document.querySelector("[name = 'cornerDotStyle']");
-const optionSquareDotColor = document.querySelector("[name = 'cornerDotColor']");
-const optionBgColor = document.querySelector("[name = 'backgroundColor']");
-const optionImgColor = document.querySelector("[name = 'imageColor']");
-const optionExtension = document.querySelector("[name='extension']");
-const options = document.querySelectorAll("select, input[type='color']");
-
-const buttons = document.querySelector(".button")
-const buttonGenerateQr = document.getElementById("generateQr");
-const buttonClear = document.getElementById("clear");
-const buttonDownload = document.getElementById("download");
-const qrContainer = document.getElementById("qr");
-const message = document.querySelector(".info__message");
-
-const regexNames = /^[A-Za-zñÑáéíóúÁÉÍÓÚ]{1,15}$/i;
-const regexPhone = /^\+?\d{1,15}$/;
-const regexMail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
+const $data = document.querySelectorAll(".data__input"),
+  $options = document.querySelectorAll("select, input[type='color']"),
+  $buttons = document.querySelector(".button"),
+  $buttonGenerateQr = document.getElementById("generateQr"),
+  $buttonClear = document.getElementById("clear"),
+  $buttonDownload = document.getElementById("download"),
+  $qrContainer = document.getElementById("qr"),
+  $message = document.querySelector(".info__message");
+const regexNames = /^[A-Za-zñÑáéíóúÁÉÍÓÚ]{1,15}$/i,
+  regexPhone = /^\+?\d{1,15}$/,
+  regexMail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const inputError = {
   input_name: null,
   input_lastName: null,
   input_phone: null,
   input_email: null
 }
-
 let qrCode = "";
 
 
 function vcardTemplate() {
   return `BEGIN:VCARD
 VERSION:3.0
-N:${$dataLastName.value};${$dataName.value}
-FN:${$dataName.value} ${$dataLastName.value}
-TEL;CELL:${$dataPhone.value}
-EMAIL:${$dataEmail.value}
+N:${Array.from($data)[getIndex($data, "LastName")].value};${Array.from($data)[getIndex($data, "Name")].value}
+FN:${Array.from($data)[getIndex($data, "Name")].value} ${Array.from($data)[getIndex($data, "LastName")].value}
+TEL;CELL:${Array.from($data)[getIndex($data, "Phone")].value}
+EMAIL:${Array.from($data)[getIndex($data, "Email")].value}
 END:VCARD`
 }
 
 function imgTemplate() {
   return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-<path fill="${encodeURIComponent(optionImgColor.value)}" d="M0 96l576 0c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96zm0 32V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128H0zM64 405.3c0-29.5 23.9-53.3 53.3-53.3H234.7c29.5 0 53.3 23.9 53.3 53.3c0 5.9-4.8 10.7-10.7 10.7H74.7c-5.9 0-10.7-4.8-10.7-10.7zM176 192a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm176 16c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16z"/></svg>`
+<path fill="${encodeURIComponent(Array.from($options)[getIndex($options, "imageColor")].value)}" d="M0 96l576 0c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96zm0 32V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128H0zM64 405.3c0-29.5 23.9-53.3 53.3-53.3H234.7c29.5 0 53.3 23.9 53.3 53.3c0 5.9-4.8 10.7-10.7 10.7H74.7c-5.9 0-10.7-4.8-10.7-10.7zM176 192a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm176 16c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16z"/></svg>`
 }
 
-buttons.addEventListener("click", (e) => {
-  if (e.target.getAttribute("id") === "generateQr") {
-    enableOptions();
-    enableItem(buttonDownload)
-    if (!qrContainer.innerHTML)
-      generateQR();
-    else
-      updateQR();
-  }
-  if (e.target.getAttribute("id") === "clear")
-    clear();
-  if (e.target.getAttribute("id") === "download")
-    downloadQR();
-})
+
 
 function downloadQR() {
   qrCode.download({
     name: "vCard",
-    extension: optionExtension.value
+    extension: Array.from($options)[getIndex($options, "extension")].value
   })
 }
 
 function generateQR() {
   qrCode = new QRCodeStyling(getValues());
-  qrCode.append(qrContainer)
+  qrCode.append($qrContainer)
 }
 
 function updateQR() {
   qrCode.update(getValues())
+}
+function getIndex(vector, condition) {
+  return Array.from(vector).findIndex((e) =>
+    e.getAttribute("name") === condition)
 }
 
 function getValues() {
@@ -92,30 +65,30 @@ function getValues() {
       margin: 3
     },
     dotsOptions: {
-      type: optionDotStyle.value,
-      color: optionDotColor.value
+      type: Array.from($options)[getIndex($options, "dotStyle")].value,
+      color: Array.from($options)[getIndex($options, "dotColor")].value
     },
     backgroundOptions: {
-      color: optionBgColor.value
+      color: Array.from($options)[getIndex($options, "backgroundColor")].value
     },
     cornersSquareOptions: {
-      type: optionSquareStyle.value,
-      color: optionSquareColor.value
+      type: Array.from($options)[getIndex($options, "cornerStyle")].value,
+      color: Array.from($options)[getIndex($options, "cornerColor")].value
     },
     cornersDotOptions: {
-      type: optionSquareDotStyle.value,
-      color: optionSquareDotColor.value
+      type: Array.from($options)[getIndex($options, "cornerDotStyle")].value,
+      color: Array.from($options)[getIndex($options, "cornerDotColor")].value
     }
   }
 }
 
 function enableOptions() {
-  Array.from(options).forEach((e) => {
+  $options.forEach((e) => {
     enableItem(e)
   })
 }
 function disableOptions() {
-  Array.from(options).forEach((e) => {
+  $options.forEach((e) => {
     disableItem(e)
   })
 }
@@ -127,23 +100,30 @@ function disableItem(item) {
 function enableItem(item) {
   item.disabled = false;
 }
-
+function messageError(condition) {
+  if (condition) {
+    $message.classList.add("info__message--error")
+    $message.innerHTML = "Enter a valid value"
+  }
+  else {
+    $message.classList.remove("info__message--error")
+    $message.innerHTML = "Enter the data to generate the code"
+  }
+}
 function clear() {
-  qrContainer.innerHTML = "";
-  Array.from($data).forEach((e) => {
+  $qrContainer.innerHTML = "";
+  $data.forEach((e) => {
     e.value = "";
   })
-  Array.from($data).forEach((e) => {
+  $data.forEach((e) => {
     e.classList.remove("data__input--error")
     e.classList.remove("data__input--succes")
   })
   disableOptions();
-  disableItem(buttonClear)
-  disableItem(buttonGenerateQr)
-  disableItem(buttonDownload)
-  message.classList.remove("info__message--error")
-  message.innerHTML = "Enter the data to generate the code"
-
+  disableItem($buttonClear)
+  disableItem($buttonGenerateQr)
+  disableItem($buttonDownload)
+  messageError(false);
 }
 
 function checkElement(regExp, element) {
@@ -158,16 +138,14 @@ function checkElement(regExp, element) {
   } else {
     element.classList.add("data__input--error")
     element.classList.remove("data__input--succes")
-    message.classList.add("info__message--error")
-    message.innerHTML = "Enter a valid value"
+    messageError(true)
     return false;
   }
 }
 
 function checkError() {
   if (!Object.values(inputError).includes(false)) {
-    message.classList.remove("info__message--error")
-    message.innerHTML = "Enter the data to generate the code"
+    messageError(false)
   }
 }
 
@@ -181,14 +159,14 @@ function checkData(element) {
   if (element.getAttribute("name") === "Email")
     inputError.input_email = checkElement(regexMail, element)
   checkError();
-  if (!Object.values(inputError).includes(false) && $dataName.value && $dataPhone.value)
-    enableItem(buttonGenerateQr)
+  if (!Object.values(inputError).includes(false) && Array.from($data)[getIndex($data, "Name")].value && Array.from($data)[getIndex($data, "Phone")].value)
+    enableItem($buttonGenerateQr)
   else
-    disableItem(buttonGenerateQr)
+    disableItem($buttonGenerateQr)
   if (Object.values(inputError).includes(true) || Object.values(inputError).includes(false))
-    enableItem(buttonClear)
+    enableItem($buttonClear)
   else
-    disableItem(buttonClear)
+    disableItem($buttonClear)
 }
 
 document.addEventListener("change", (e) => {
@@ -196,4 +174,19 @@ document.addEventListener("change", (e) => {
     checkData(e.target);
   else if (e.target.getAttribute("name") != "extension")
     updateQR()
+})
+
+$buttons.addEventListener("click", (e) => {
+  if (e.target.getAttribute("id") === "generateQr") {
+    enableOptions();
+    enableItem($buttonDownload)
+    if (!$qrContainer.innerHTML)
+      generateQR();
+    else
+      updateQR();
+  }
+  if (e.target.getAttribute("id") === "clear")
+    clear();
+  if (e.target.getAttribute("id") === "download")
+    downloadQR();
 })
