@@ -12,6 +12,7 @@ vCard is a standard format for the exchange of personal information, specificall
 - The data entered is validated before allowing the code to be created
 - You can customize color and styles of the elements that make up the code
 - You can download the code and choose the extension of the image
+- **You can add contacts on your smartphone simply by scanning the code**
 
 ## Preview
 
