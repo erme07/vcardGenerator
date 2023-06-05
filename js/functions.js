@@ -55,11 +55,11 @@ const checkError = () => {
 const checkData = (element) => {
   if (element.getAttribute("name") === "Name")
     inputError.input_name = checkElement(regexNames, element)
-  if (element.getAttribute("name") === "LastName")
+  else if (element.getAttribute("name") === "LastName")
     inputError.input_lastName = checkElement(regexNames, element)
-  if (element.getAttribute("name") === "Phone")
+  else if (element.getAttribute("name") === "Phone")
     inputError.input_phone = checkElement(regexPhone, element)
-  if (element.getAttribute("name") === "Email")
+  else if (element.getAttribute("name") === "Email")
     inputError.input_email = checkElement(regexMail, element)
   checkError();
   if (!Object.values(inputError).includes(false) && Array.from($data)[getIndex($data, "Name")].value && Array.from($data)[getIndex($data, "Phone")].value)
