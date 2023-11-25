@@ -26,89 +26,84 @@
   <title>vCard Generator</title>
 </head>
 <body>
-  <svg class="repo-link" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
-    <title>Repositorio en Github</title>
-    <a href="https://github.com/erme07/vcardGenerator">
-      <g class="icon">
-        <path class="main-color" d="M 0,0 250,250 V 0 Z"/>
-        <path class="second-color arm" d="M 128.3,109 C 113.8,99.7 119,89.6 119,89.6 c 3,-6.9 1.5,-11 1.5,-11 -1.3,-6.6 2.9,-2.3 2.9,-2.3 3.9,4.6 2.1,11 2.1,11 -2.6,10.3 5.1,14.6 8.9,15.9"/>
-        <path class="second-color" d="m 115,115 c -0.1,0.1 3.7,1.5 4.8,0.4 l 13.9,-13.8 c 3.2,-2.4 6.2,-3.2 8.5,-3 -8.4,-10.6 -14.7,-24.2 1.6,-40.6 4.7,-4.6 10.2,-6.8 15.9,-7 0.6,-1.6 3.5,-7.4 11.7,-10.9 0,0 4.7,2.4 7.4,16.1 4.3,2.4 8.4,5.6 12.1,9.2 3.6,3.6 6.8,7.8 9.2,12.2 13.7,2.6 16.2,7.3 16.2,7.3 -3.6,8.2 -9.4,11.1 -10.9,11.7 -0.3,5.8 -2.4,11.2 -7.1,15.9 -16.4,16.4 -30,10 -40.6,1.6 0.2,2.8 -1,6.8 -5,10.8 L 141,136.5 c -1.2,1.2 0.6,5.4 0.8,5.3 z"/>
-      </g>
-    </a>
-  </svg>
   <div class="container">
-    <h1 class="title">VCard Generator</h1>
-    <main>
-      <div class="data" id="data">
-        <div class="data__header">
-          <h3 class="data__title">Personal Data</h3>
-        </div>
+    <header>
+      <h1 class="title">VCard Generator</h1>
+    </header>
+    <div class="holes">
+      <div class="holes__item"></div>
+      <div class="holes__item"></div>
+      <div class="holes__item"></div>
+    </div>
+    <main class="content">
+
+      <section class="data" id="data">
+        <header class="header">
+          <h2 class="header__title">Personal Data</h2>
+        </header>
         <input class="data__input" type="text" name="Name" placeholder="Name*">
         <input class="data__input" type="text" name="LastName" placeholder="Last Name">
         <input class="data__input" type="tel" name="Phone" placeholder="Phone*">
         <input class="data__input" type="email" name="Email" placeholder="e-mail">
-      </div>
-      <div class="content">
-        <div class="info">
-          <div class="info__message">Enter the data to generate the code</div>
+        <div class="data__message">Enter the data to generate the code</div>
+      </section>
+
+      <section class="qr" id="qr"></section>
+
+      <section class="btn-panel">
+        <button class="btn-panel__button" id="generateQr" disabled title="Generate the QR Code">GENERATE</button>
+        <button class="btn-panel__button" id="clear" disabled title="Clear code and data">CLEAR</button>
+        <div class="btn-panel__download">
+          <button class="btn-panel__button" id="download" disabled title="Download QR Code">DOWNLOAD</button>
+          <select class="btn-panel__button" name="extension" disabled title="Chose a format">
+            <option value="png">png</option>
+            <option value="jpeg">jpeg</option>
+            <option value="svg">svg</option>
+            <option value="webp">webp</option>
+          </select>
         </div>
-        <div class="button">
-          <button class="button__element" id="generateQr" disabled>GENERATE</button>
-          <button class="button__element" id="clear" disabled>CLEAR</button>
-          <button class="button__element" id="download" disabled>DOWNLOAD</button>
-        </div>
-        <div class="qr" id="qr"></div>
-        <div class="options">
-          <fieldset class="field">
-            <legend class="field__header">Dots Options</legend>
-            <select class="field__item" name="dotStyle" disabled>
-                <option value="square">Square</option>
-                <option value="dots">Dots</option>
-                <option value="rounded">Rounded</option>
-                <option value="extra-rounded">Extra Rounded</option>
-                <option value="classy">Classy</option>
-                <option value="classy-rounded">Classy Rounded</option>
-            </select>
-            <input class="field__item" type="color" name="dotColor" value="#182c2b" disabled>
-          </fieldset>
-          <fieldset class="field">
-            <legend class="field__header">Corners Square</legend>
-            <select class="field__item" name="cornerStyle" disabled>
-              <option value="">Default</option>
+      </section>
+
+      <section class="options">
+        <div class="field">
+          <div class="header">
+            <h3 class="header__title header__title--small">Dots Options</h3>
+          </div>
+          <select class="field__item" name="dotStyle" disabled>
               <option value="square">Square</option>
+              <option value="dots">Dots</option>
+              <option value="rounded">Rounded</option>
               <option value="extra-rounded">Extra Rounded</option>
-              <option value="dot">Dot</option>
-            </select>
-            <input class="field__item" type="color" name="cornerColor" value="#182c2b" disabled>
-          </fieldset>
-          <fieldset class="field">
-            <legend class="field__header">Corners Dot</legend>
-            <select class="field__item" name="cornerDotStyle" disabled>
-              <option value="">Default</option>
-              <option value="square">Square</option>
-              <option value="dot">Dot</option>
-            </select>
-            <input class="field__item" type="color" name="cornerDotColor" value="#d53839" disabled>
-          </fieldset>
-          <fieldset class="field">
-            <legend class="field__header">Icon</legend>
-            <input class="field__item" type="color" name="imageColor" value="#d53839" disabled>
-          </fieldset>
-          <fieldset class="field">
-            <legend class="field__header">Bg Color</legend>
-            <input class="field__item" type="color" name="backgroundColor" value="#fffffd" disabled>
-          </fieldset>
-          <fieldset class="field">
-            <legend class="field__header">Download</legend>
-            <select class="field__item" name="extension" disabled>
-              <option value="png">png</option>
-              <option value="jpeg">jpeg</option>
-              <option value="svg">svg</option>
-              <option value="webp">webp</option>
-            </select>
-          </fieldset>
+              <option value="classy">Classy</option>
+              <option value="classy-rounded">Classy Rounded</option>
+          </select>
+          <input class="field__item" type="color" name="dotColor" value="#182c2b" disabled>
         </div>
-      </div>
+        <div class="field">
+          <div class="header">
+            <h3 class="header__title header__title--small">Corners Square</h3>
+          </div>
+          <select class="field__item" name="cornerStyle" disabled>
+            <option value="">Default</option>
+            <option value="square">Square</option>
+            <option value="extra-rounded">Extra Rounded</option>
+            <option value="dot">Dot</option>
+          </select>
+          <input class="field__item" type="color" name="cornerColor" value="#182c2b" disabled>
+        </div>
+        <div class="field">
+          <div class="header">
+            <h3 class="header__title header__title--small">Corners Dot</h3>
+          </div>
+          <select class="field__item" name="cornerDotStyle" disabled>
+            <option value="">Default</option>
+            <option value="square">Square</option>
+            <option value="dot">Dot</option>
+          </select>
+          <input class="field__item" type="color" name="cornerDotColor" value="#d53839" disabled>
+        </div>
+      </section>
+ 
     </main>
   </div>
 </body>
