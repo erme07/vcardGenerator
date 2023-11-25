@@ -1,9 +1,11 @@
-import utilities from './functions.js'
+import utilities from './functions.js';
 
-document.addEventListener("change", (e) => {
+document.addEventListener("input", (e) => {
   if (e.target.classList.contains("data__input"))
     utilities.checkData(e.target);
-  else if (e.target.getAttribute("name") != "extension")
+})
+document.addEventListener("change", (e) => {
+  if (e.target.getAttribute("name") != "extension" && !e.target.classList.contains("data__input"))
     utilities.updateQR()
 })
 document.addEventListener("click", (e) => {
