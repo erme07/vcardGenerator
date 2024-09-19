@@ -1,6 +1,6 @@
 # vCard Generator
 
-[vCard Generator](https://erme07.github.io/vcardGenerator/) allows you to create a **vCard** to share using a **QR code** 
+[vCard Generator](https://vcardgenerator.pages.dev/) allows you to create a **vCard** to share using a **QR code** 
 
 ## What is a vCard?
 
